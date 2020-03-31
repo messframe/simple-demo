@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title><%= htmlWebpackPlugin.options.title %></title>
+    <!-- 引入element-ui样式 -->
+    <link id="init_elementui" rel="stylesheet" href="https://unpkg.com/element-ui@2.13.0/lib/theme-chalk/index.css">
+    <!-- 引入antd样式 -->
+    <link id="init_antd" rel="stylesheet" href="https://unpkg.com/antd@3.26.14/dist/antd.min.css">
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/reset.css">
+  </head>
+  <body>
+
+    <script type="systemjs-importmap">{"imports": {}}</script>
+    <script src=<%= htmlWebpackPlugin.options.commonDepsOrigin %>/systemjs/system.js></script>
+    <script src=<%= htmlWebpackPlugin.options.commonDepsOrigin %>/systemjs/amd.js></script>
+    <script src=<%= htmlWebpackPlugin.options.commonDepsOrigin %>/systemjs/named-exports.js></script>
+    <script src=<%= htmlWebpackPlugin.options.commonDepsOrigin %>/systemjs/use-default.js></script>
+
+    <!-- Load the common deps-->
+    <script src=<%= htmlWebpackPlugin.options.commonDepsConf %>/common-deps.js></script>
+
+    <!-- Load the application -->
+    <script>
+      System.import('@center/config')
+    </script>
+    
+  </body>
+</html>
