@@ -28,5 +28,8 @@ const vueLifecycles = singleSpaVue({
 });
 
 export const bootstrap = vueLifecycles.bootstrap;
-export const mount = vueLifecycles.mount;
+export const mount = (props) => {
+  Vue.prototype.$singleSpa = props
+  return vueLifecycles.mount(props)
+};
 export const unmount = vueLifecycles.unmount;

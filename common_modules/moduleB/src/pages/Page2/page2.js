@@ -1,7 +1,7 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import {PageHeader, Skeleton, Result, Button} from 'antd'
 import './page2.less'
+import {singleSpa} from '../../utils/singleSpa'
 
 class Page2 extends React.Component {
     constructor (props) {
@@ -28,7 +28,7 @@ class Page2 extends React.Component {
             <div className="moduleB-page2">
                 <PageHeader
                     className="site-page-header"
-                    onBack={() => {this.props.history.goBack()}}
+                    onBack={() => {singleSpa.router.back()}}
                     title="moduleB-page2"
                     subTitle="现在是moduleB的page2页面"
                 />

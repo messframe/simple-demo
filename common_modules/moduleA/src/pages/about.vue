@@ -14,7 +14,7 @@
             <el-collapse class="moduleA-about-content-collapse" v-model="activeName" accordion>
                 <el-collapse-item title="vue-router" name="1">
                     <div>1. 在vue项目中，各个模块的路由，只由模块内部自身维护</div>
-                    <div>2. 跳转页面尽量使用 <el-tag>window.location.href、this.$router.push({name: 'xxx'})、router-link</el-tag>来进行跳转，
+                    <div>2. 跳转页面尽量使用 <el-tag>内置的router对象</el-tag>来进行跳转，
                         <el-tag type='warning'>不要通过vue-router的path属性来跳转</el-tag>，这种方式不会触发浏览器onhashchange事件</div>
                 </el-collapse-item>
                 <el-collapse-item title="vuex" name="2">

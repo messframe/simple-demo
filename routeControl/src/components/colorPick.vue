@@ -81,7 +81,7 @@
                 const xhr = new XMLHttpRequest();
                 xhr.onreadystatechange = () => {
                     if (xhr.readyState === 4 && xhr.status === 200) {
-                        this[variable] = xhr.responseText.replace(/fonts\/element-icons/g, `https://unpkg.com/element-ui@${elementVersion}/lib/theme-chalk/fonts/element-icons`);
+                        this[variable] = xhr.responseText.replace(/fonts\/element-icons/g, `https://assets.winerlu.com/openModules/element-ui@${elementVersion}/lib/theme-chalk/fonts/element-icons`);
                         callback();
                     }
                 };
@@ -167,7 +167,7 @@
                 const chalkHandler = getHandler("elementChalk", "elementUI-style");
 
                 if (!this.elementChalk) {
-                    const url = `https://unpkg.com/element-ui@${elementVersion}/lib/theme-chalk/index.css`;
+                    const url = `https://assets.winerlu.com/openModules/element-ui@${elementVersion}/lib/theme-chalk/index.css`;
                     this.getCSSString(url, chalkHandler, "elementChalk");
                 } else {
                     chalkHandler();
@@ -212,7 +212,7 @@
 
                 const chalkHandler = getHandler("antdChalk", "antd-style");
                 if (!this.antdChalk) {
-                    const url = `https://unpkg.com/antd@${antdVersion}/dist/antd.min.css`;
+                    const url = `https://assets.winerlu.com/openModules/antd@${antdVersion}/dist/antd.min.css`;
                     this.getCSSString(url, chalkHandler, "antdChalk");
                 } else {
                     chalkHandler();

@@ -62,14 +62,14 @@
         watch: {
             active: {
                 handler () {
-                    const hash = window.location.hash
-                    this.activeMenu = hash.split('#')[1]
+                    const hash = window.location.hash || window.location.pathname
+                    this.activeMenu = hash.startsWith('#') ? hash.split('#')[1] : hash
                 }
             }
         },
         methods: {
             menuClick(item) {
-                window.location.href = '/#' + item
+                this.$singleSpa.router.push(item)
             }
         }
     }

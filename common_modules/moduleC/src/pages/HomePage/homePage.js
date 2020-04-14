@@ -1,14 +1,14 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { Alert, Tag, Card, Button } from 'antd'
 import './homePage.less'
+import {singleSpa} from '../../utils/singleSpa'
 
 class HomePage extends React.Component {
     openWindow = (url) => {
         window.open(url)
     }
-    rediret = (url) => {
-        window.location.href = url
+    goPage = (url) => {
+        singleSpa.router.push(url)
     }
     render () {
         let tagClassName = this.props.auth !== 'admin'  ? 'moduleC-home-primary' : 'moduleC-home-warning'
@@ -35,8 +35,8 @@ class HomePage extends React.Component {
                     </p>
                 </Card>
                 <div className='moduleC-home-but'>
-                    <Button type='primary' onClick={() => {this.rediret('/#/moduleC/page1')}}>moduleC-page1</Button>
-                    <Button type='primary' onClick={() => {this.rediret('/#/moduleC/page2')}}>moduleC-page2</Button>
+                    <Button type='primary' onClick={() => {this.goPage('/moduleC/page1')}}>moduleC-page1</Button>
+                    <Button type='primary' onClick={() => {this.goPage('/moduleC/page2')}}>moduleC-page2</Button>
                 </div>
             </div>
         )

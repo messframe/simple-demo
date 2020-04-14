@@ -39,7 +39,11 @@
                 </p>
             </div>
         </el-card>
-        <el-button style="margin-top: 20px" @click="goTo('subHomePage')">这个页面还有个子路由，点击看看</el-button>
+        <el-button style="margin-top: 20px" @click="goPath('/moduleA/home/subHome')">这个页面还有个子路由，点击看看</el-button>
+        <br>
+        <el-link style="margin-top: 20px; font-size: 16px" @click="goTo(1)">前进</el-link>
+        <br>
+        <el-link style="margin-top: 20px; font-size: 16px" @click="forward()">forword前进</el-link>
         <router-view></router-view>
     </section>
 </template>
@@ -54,9 +58,14 @@ export default {
         })
     },
     methods: {
-        goTo (name) {
-            if (!name) return
-            this.$router.push({ name: name })
+        goPath (path) {
+            this.$singleSpa.router.push(path)
+        },
+        goTo(n) {
+            this.$singleSpa.router.go(n)
+        },
+        forward () {
+            this.$singleSpa.router.forward()
         }
     }
 }
