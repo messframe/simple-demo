@@ -1,5 +1,6 @@
 module.exports = {
     "title": "center",
+    "routerMode": 'history',
     "components": {
         "center": {
             "moduleName": "@center/config",

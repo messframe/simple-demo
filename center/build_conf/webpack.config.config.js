@@ -9,9 +9,9 @@ module.exports = {
   entry: './src/config.js',
   output: {
     filename: 'config.js',
-    // library: 'config',
+    library: 'config',
     libraryTarget: 'amd',
-    path: path.resolve(__dirname, '../build'),
+    path: path.resolve(__dirname, '../build')
   },
   mode: 'production',
   module: {

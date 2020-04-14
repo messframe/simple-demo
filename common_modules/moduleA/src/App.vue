@@ -8,8 +8,8 @@
 	export default {
 		name: 'App',
 		created() {
-			if (window.eventBus) {
-				window.eventBus.on('authChange', this.authChange)
+			if (this.$singleSpa.eventBus) {
+				this.$singleSpa.eventBus.on('authChange', this.authChange)
 			}
 		},
 		methods: {

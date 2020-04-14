@@ -8,7 +8,8 @@ import rootComponent from './root.component'
 const reactLifecycles = singleSpaReact({
   React,
   ReactDOM,
-  rootComponent,
+  // rootComponent,
+  loadRootComponent: () => import('./root.component').then(property('default')),
   domElementGetter,
 })
 
@@ -19,9 +20,7 @@ export const bootstrap = [
   reactLifecycles.bootstrap,
 ]
 
-export const mount = [
-  reactLifecycles.mount,
-]
+export const mount = (props) => reactLifecycles.mount(props)
 
 export const unmount = [
   reactLifecycles.unmount,

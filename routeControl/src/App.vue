@@ -10,11 +10,13 @@
 	import MainMenu from './components/menu.vue'
 	import MainHeader from './components/header'
 	import MainContainer from './components/container'
+	let preUrl = ''
 	export default {
 		name: 'App',
 		data () {
 			return {
-				activeMenu: ''
+				activeMenu: '',
+				intervalId: '',
 			}
 		},
 		components: {
@@ -26,38 +28,59 @@
 			this.removeNodeById('app_moduleA')
 			this.removeNodeById('app_moduleB')
 			this.removeNodeById('app_moduleC')
+			clearInterval(this.intervalId)
 		},
 		mounted() {
-			/**
-			 * 监听浏览器hash路由变化
-			 * 动态隐藏不应该显示的模块
-			 */
-			if (("onhashchange" in window) && ((typeof document.documentMode === "undefined") || document
-					.documentMode ==
-					8)) {
-				// 浏览器支持onhashchange事件
-				window.onhashchange = this.hashChangeFire; // TODO，对应新的hash执行的操作函数
-			} else {
-				// 不支持则用定时器检测的办法
-				setInterval(function () {
-					var ischanged = this.isHashChanged(); // TODO，检测hash值或其中某一段是否更改的函数
-					if (ischanged) {
-						this.hashChangeFire(); // TODO，对应新的hash执行的操作函数
-					}
-				}, 150);
-			}
+			this.watchRouter()
 			this.hashChangeFire()
 		},
 		methods: {
 			removeNodeById(id) {
-				if (document.getElementById(id)) document.body.removeChild(document.getElementById(id))
+				let dom = document.getElementById(id)
+				if (document.getElementById(id)) dom.parentNode.removeChild(document.getElementById(id))
+			},
+			watchRouter () {
+				if (this.$singleSpa.routerMode === 'hash') {
+					/**
+					 * 监听浏览器hash路由变化
+					 * 动态隐藏不应该显示的模块
+					 */
+					if (("onhashchange" in window) && ((typeof document.documentMode === "undefined") || document
+							.documentMode ==
+							8)) {
+						// 浏览器支持onhashchange事件
+						window.onhashchange = this.hashChangeFire; // TODO，对应新的hash执行的操作函数
+					} else {
+						// 不支持则用定时器检测的办法
+						this.intervalId = setInterval(() => {
+							let ischanged = this.isHashChanged(); // TODO，检测hash值或其中某一段是否更改的函数
+							if (ischanged) {
+								this.hashChangeFire(); // TODO，对应新的hash执行的操作函数
+							}
+						}, 150);
+					}
+				} else if (this.$singleSpa.routerMode === 'history') {
+					if (window.onpopstate) {
+						window.onpopstate = this.hashChangeFire
+					} else {
+						// 不支持则用定时器检测的办法
+						this.intervalId = setInterval(() => {
+							let ischanged = this.isHashChanged(); // TODO，检测hash值或其中某一段是否更改的函数
+							if (ischanged) {
+								this.hashChangeFire(); // TODO，对应新的hash执行的操作函数
+							}
+						}, 150);
+					}　
+				}
 			},
 			hashChangeFire() {
-				if (window.location.hash === '#/') {
-					window.location.href = '/#/moduleA/home'
+				if (window.location.hash === '#/' ||
+					(window.location.pathname === '/' && window.location.hash === '')
+					) {
+					this.$singleSpa.router.push('/moduleA/home')
 					return
 				}
-				let moduleName = window.location.hash.split('/')[1]
+				let moduleName = (window.location.hash || window.location.pathname).split('/')[1]
 				this.resetModuleStyle(moduleName)
 				this.activeMenu = Math.random()
 			},

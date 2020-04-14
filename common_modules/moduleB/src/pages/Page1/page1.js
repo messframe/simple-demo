@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {PageHeader, Timeline} from 'antd'
 import './page1.less'
+import {singleSpa} from '../../utils/singleSpa'
 
 class Page1 extends React.Component {
     render () {
@@ -9,7 +10,7 @@ class Page1 extends React.Component {
             <div className="moduleB-page1">
                 <PageHeader
                     className="site-page-header"
-                    onBack={() => {this.props.history.goBack()}}
+                    onBack={() => {singleSpa.router.back()}}
                     title="moduleB-page1"
                     subTitle="现在是moduleB的page1页面"
                 />

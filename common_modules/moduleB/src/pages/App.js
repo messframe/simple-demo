@@ -2,10 +2,11 @@ import HomePage from './HomePage/homePage'
 import Page1 from './Page1/page1'
 import Page2 from './Page2/page2'
 import React from 'react'
-import {Route,HashRouter, Switch} from 'react-router-dom'
+import {Route,BrowserRouter, Switch} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {updateAuth} from '../store/actions'
 import {notification} from 'antd'
+import {singleSpa} from '../utils/singleSpa'
 import PropTypes from 'prop-types'
 import './app.less'
 
@@ -14,8 +15,8 @@ class App extends React.Component {
         super(props)
 	}
     componentDidMount () {
-        if (window.eventBus) {
-            window.eventBus.on('authChange', this.updateAuth)
+        if (singleSpa.eventBus) {
+            singleSpa.eventBus.on('authChange', this.updateAuth)
         }
     }
     updateAuth = (auth) => {
@@ -28,13 +29,13 @@ class App extends React.Component {
     render () {
         return (
             <div className='moduleB-content'>
-                <HashRouter>
+                <BrowserRouter>
                     <Switch>
                         <Route exact path="/moduleB" component={(props) => <HomePage {...props} {...this.props}/>}/>
                         <Route exact path="/moduleB/page1" component={(props) => <Page1 {...props} {...this.props}/>}/>
                         <Route exact path="/moduleB/page2" component={(props) => <Page2 {...props} {...this.props}/>}/>
                     </Switch>
-                </HashRouter>
+                </BrowserRouter>
             </div>
         )
     }

@@ -48,14 +48,14 @@ export default {
     },
     mounted () {
         setTimeout(() => {
-            window.eventBus.trigger('authChange', this.auth)
+            this.$singleSpa.eventBus.trigger('authChange', this.auth)
         })
     },
     watch: {
         auth: {
             handler (val) {
                 this.$message.success('设置当前的权限为： ' + val);
-                window.eventBus.trigger('authChange', val)
+                this.$singleSpa.eventBus.trigger('authChange', val)
             },
             openWindow (url) {
                 window.open(url)

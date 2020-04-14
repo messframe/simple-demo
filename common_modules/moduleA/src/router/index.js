@@ -6,7 +6,7 @@ import modulesA from './modulesA'
 Vue.use(Router)
 
 const router = new Router({
-    mode: 'hash',
+    mode: 'history',
     routes: [
         ...modulesA
     ]
